@@ -61,7 +61,7 @@ bool MenuLayer::init() {
 
         piVar2 = (int * ) Sprite::create("images/menuSheet/MainMenuBG_001.png");
         pcVar12 = * (code ** )( * piVar2 + 0x4c);
-        Point::Point(aCStack_1b0, extraout_s0, extraout_s1);
+        Vec2(aCStack_1b0, extraout_s0, extraout_s1);
         ( * pcVar12)(piVar2, aCStack_1b0);
         Point::~Point(aCStack_1b0);
         ( ** (code ** )( * (int * ) in_r0 + 0xf0))();
@@ -73,11 +73,11 @@ bool MenuLayer::init() {
         ( * pcVar12)(piVar2, fVar3 / fVar4);
         piVar2 = (int * ) Sprite::create("images/menuSheet/boomlingslogo.png");
         pcVar12 = * (code ** )( * piVar2 + 0x4c);
-        Point::Point(aCStack_190, extraout_s0_00, extraout_s1_00);
+        Vec2(aCStack_190, extraout_s0_00, extraout_s1_00);
         ( * pcVar12)(piVar2, aCStack_190);
         Point::~Point(aCStack_190);
         ( ** (code ** )( * (int * ) in_r0 + 0xf0))();
-        piVar5 = (int * ) ParticleSystemQuad::particleWithFile("glitterEffect.plist");
+        piVar5 = (int * ) ParticleSystemQuad::particleWithFile("plist/glitterEffect.plist");
         ( ** (code ** )( * (int * ) in_r0 + 0xf0))();
         pcVar12 = * (code ** )( * piVar5 + 0x4c);
         uVar6 = ( ** (code ** )( * piVar2 + 0x48))(piVar2);
@@ -91,7 +91,7 @@ bool MenuLayer::init() {
         piVar5 = (int * ) Menu::menuWithItems(pCVar8, 0);
         uVar13 = ( ** (code ** )( * (int * ) in_r0 + 0xf0))();
         pcVar12 = * (code ** )( * piVar5 + 0x4c);
-        Point::Point(aCStack_170, (float) uVar13, (float)((ulonglong) uVar13 >> 0x20));
+        Vec2(aCStack_170, (float) uVar13, (float)((ulonglong) uVar13 >> 0x20));
         ( * pcVar12)(piVar5, aCStack_170);
         Point::~Point(aCStack_170);
         pCVar7 = (Node * ) Sprite::createWithSpriteFrameName("feedbackBtn_001.png");
@@ -102,13 +102,13 @@ bool MenuLayer::init() {
         piVar5 = (int * ) Menu::menuWithItems(pCVar8, 0);
         uVar13 = ( ** (code ** )( * (int * ) in_r0 + 0xf0))();
         pcVar12 = * (code ** )( * piVar5 + 0x4c);
-        Point::Point(aCStack_150, (float) uVar13, (float)((ulonglong) uVar13 >> 0x20));
+        Vec2(aCStack_150, (float) uVar13, (float)((ulonglong) uVar13 >> 0x20));
         ( * pcVar12)(piVar5, aCStack_150);
         Point::~Point(aCStack_150);
         piVar9 = (int * ) Sprite::createWithSpriteFrameName("hello_001.png");
         uVar13 = ( ** (code ** )( * (int * ) in_r0 + 0xf0))();
         pcVar12 = * (code ** )( * piVar9 + 0x4c);
-        Point::Point(aCStack_130, (float) uVar13, (float)((ulonglong) uVar13 >> 0x20));
+        Vec2(aCStack_130, (float) uVar13, (float)((ulonglong) uVar13 >> 0x20));
         ( * pcVar12)(piVar9, aCStack_130);
         Point::~Point(aCStack_130);
         piVar9 = (int * ) Sprite::createWithSpriteFrameName("feedback_001.png");
@@ -116,7 +116,7 @@ bool MenuLayer::init() {
         pcVar12 = * (code ** )( * piVar9 + 0x4c);
         ( ** (code ** )( * piVar5 + 0x48))(piVar5);
         uVar13 = ( ** (code ** )( * piVar5 + 0x48))(piVar5);
-        Point::Point(aCStack_110, (float) uVar13, (float)((ulonglong) uVar13 >> 0x20));
+        Vec2(aCStack_110, (float) uVar13, (float)((ulonglong) uVar13 >> 0x20));
         ( * pcVar12)(piVar9, aCStack_110);
         Point::~Point(aCStack_110);
         piVar5 = (int * ) Menu::create();
@@ -128,7 +128,7 @@ bool MenuLayer::init() {
         ( ** (code ** )( * piVar5 + 0xec))(piVar5, uVar6);
         pcVar12 = * (code ** )( * piVar5 + 0x4c);
         uVar13 = ( ** (code ** )( * piVar2 + 0x48))(piVar2);
-        Point::Point(aCStack_f0, (float) uVar13, (float)((ulonglong) uVar13 >> 0x20));
+        Vec2(aCStack_f0, (float) uVar13, (float)((ulonglong) uVar13 >> 0x20));
         ( * pcVar12)(piVar5, aCStack_f0);
         uVar13 = Point::~Point(aCStack_f0);
         pCVar10 = (ActionInterval * )
@@ -149,7 +149,7 @@ bool MenuLayer::init() {
         uVar13 = ( ** (code ** )( * (int * ) in_r0 + 0xec))();
         piVar2 = * (int ** )(in_r0 + 0x15c);
         pcVar12 = * (code ** )( * piVar2 + 0x4c);
-        Point::Point(aCStack_d0, (float) uVar13, (float)((ulonglong) uVar13 >> 0x20));
+        Vec2(aCStack_d0, (float) uVar13, (float)((ulonglong) uVar13 >> 0x20));
         ( * pcVar12)(piVar2, aCStack_d0);
         Point::~Point(aCStack_d0);
         uVar6 = Sprite::createWithSpriteFrameName("rate_001.png");
@@ -159,10 +159,10 @@ bool MenuLayer::init() {
         pcVar12 = * (code ** )( * piVar2 + 0x4c);
         ( ** (code ** )( ** (int ** )(in_r0 + 0x15c) + 0x48))();
         uVar13 = ( ** (code ** )( ** (int ** )(in_r0 + 0x15c) + 0x48))();
-        Point::Point(aCStack_b0, (float) uVar13, (float)((ulonglong) uVar13 >> 0x20));
+        Vec2(aCStack_b0, (float) uVar13, (float)((ulonglong) uVar13 >> 0x20));
         ( * pcVar12)(piVar2, aCStack_b0);
         uVar13 = Point::~Point(aCStack_b0);
-        fVar3 = (float) Point::Point(aCStack_90, (float) uVar13, (float)((ulonglong) uVar13 >> 0x20));
+        fVar3 = (float) Vec2(aCStack_90, (float) uVar13, (float)((ulonglong) uVar13 >> 0x20));
         pCVar10 = (ActionInterval * ) MoveBy::actionWithDuration(fVar3, (Point * ) 0x3f800000);
         fVar3 = (float) Point::~Point(aCStack_90);
         pCVar11 = (FiniteTimeAction * ) EaseInOut::actionWithAction(pCVar10, fVar3);
@@ -170,18 +170,14 @@ bool MenuLayer::init() {
         pCVar10 = (ActionInterval * ) Sequence::actions(pCVar11, uVar6, 0);
         RepeatForever::actionWithAction(pCVar10);
         Node::runAction( * (Action ** )(in_r0 + 0x158));
-        piVar2 = (int * ) GameManager::sharedState();
         iVar1 = ( ** (code ** )( * piVar2 + 0x280))();
         if (iVar1 != 0) {
-            piVar2 = (int * ) GameManager::sharedState();
-            pcVar12 = * (code ** )( * piVar2 + 0x224);
+            pcVar12 = * (code ** )( * gm + 0x224);
             FUN_0029f158(auStack_200, "Player", auStack_204);
-            ( * pcVar12)(piVar2, auStack_200);
             FUN_0029d9dc(auStack_200);
             AppDelegate::showLoadError();
         }
-        GameManager::sharedState();
-        GameManager::showMainMenuAd();
+        gm->showMainMenuAd();
         pCVar7 = (Node * ) Sprite::create("images/moreGamesBtn_001.png");
         uStack_1d4 = 0;
         pcStack_1d8 = (code * ) 0x10c27b;
@@ -190,7 +186,7 @@ bool MenuLayer::init() {
         piVar2 = (int * ) Menu::create(pCVar8, 0);
         uVar13 = ( ** (code ** )( * (int * ) in_r0 + 0xf0))();
         pcVar12 = * (code ** )( * piVar2 + 0x4c);
-        Point::Point(aCStack_70, (float) uVar13, (float)((ulonglong) uVar13 >> 0x20));
+        Vec2(aCStack_70, (float) uVar13, (float)((ulonglong) uVar13 >> 0x20));
         ( * pcVar12)(piVar2, aCStack_70);
         Point::~Point(aCStack_70);
         piVar2 = (int * ) MoreGamesManager::sharedState();
@@ -199,13 +195,12 @@ bool MenuLayer::init() {
             piVar2 = (int * ) Sprite::create("images/BoomUISheet/exMark_001.png");
             uVar13 = ( ** (code ** )( * (int * ) pCVar7 + 0xec))(pCVar7, piVar2);
             pcVar12 = * (code ** )( * piVar2 + 0x4c);
-            Point::Point(aCStack_50, (float) uVar13, (float)((ulonglong) uVar13 >> 0x20));
+            Vec2(aCStack_50, (float) uVar13, (float)((ulonglong) uVar13 >> 0x20));
             ( * pcVar12)(piVar2, aCStack_50);
             Point::~Point(aCStack_50);
         }
         ( ** (code ** )( * gm + 0x210))( & uStack_1fc, gm);
-        Log("%s", uStack_1fc);
-        FUN_0029d9dc( & uStack_1fc);
+        AXLOG("%s", uStack_1fc);
         Size::~Size(aCStack_1d0);
     }
     return true;
