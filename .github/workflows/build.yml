@@ -1,0 +1,88 @@
+name: Build Axmol Multi-Platform
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest, macos-latest, macos-latest]
+        platform: [linux, windows, macos, android, ios]
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Set up CMake
+      uses: jwlawson/actions-setup-cmake@v1
+
+    - name: Install Ninja
+      uses: seanmiddleditch/gha-setup-ninja@v3
+
+    # Windows Build
+    - name: Configure and Build Windows
+      if: matrix.platform == 'windows'
+      run: |
+        cmake -S . -B build -G "Visual Studio 17 2022" -A x64 -DCMAKE_BUILD_TYPE=Release
+        cmake --build build --config Release
+
+    # Linux Build
+    - name: Configure and Build Linux
+      if: matrix.platform == 'linux'
+      run: |
+        cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+        cmake --build build --config Release
+
+    # macOS Build
+    - name: Configure and Build macOS
+      if: matrix.platform == 'macos'
+      run: |
+        cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+        cmake --build build --config Release
+
+    # Android Build
+    - name: Setup Android NDK
+      if: matrix.platform == 'android'
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 30
+        target: default
+        arch: x86_64
+
+    - name: Configure and Build Android
+      if: matrix.platform == 'android'
+      env:
+        ANDROID_NDK_ROOT: ${{ env.ANDROID_NDK_ROOT }}
+      run: |
+        # Adjust these paths if you install NDK differently
+        ANDROID_NDK=$ANDROID_NDK_ROOT
+        cmake -S . -B build_android \
+          -G Ninja \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DANDROID_ABI=arm64-v8a \
+          -DANDROID_PLATFORM=android-21 \
+          -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake
+        cmake --build build_android --config Release
+
+    # iOS Build
+    - name: Configure and Build iOS
+      if: matrix.platform == 'ios'
+      run: |
+        cmake -S . -B build_ios \
+          -G Xcode \
+          -DCMAKE_SYSTEM_NAME=iOS \
+          -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
+          -DCMAKE_OSX_DEPLOYMENT_TARGET=13.0 \
+          -DCMAKE_XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH=NO
+        cmake --build build_ios --config Release -- -sdk iphoneos
+
