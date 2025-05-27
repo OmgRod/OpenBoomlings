@@ -40,6 +40,26 @@ jobs:
     - name: Install Ninja
       uses: seanmiddleditch/gha-setup-ninja@v3
 
+    # Install PowerShell on Linux/macOS if missing (for setup.ps1)
+    - name: Install PowerShell (Linux/macOS)
+      if: matrix.platform == 'linux' || matrix.platform == 'android' || matrix.platform == 'macos' || matrix.platform == 'ios'
+      run: |
+        if ! command -v pwsh &> /dev/null; then
+          sudo snap install powershell --classic
+        fi
+
+    # Run setup.ps1 to download/build axslcc (Windows)
+    - name: Run setup.ps1 (Windows)
+      if: matrix.platform == 'windows'
+      shell: powershell
+      run: .\setup.ps1
+
+    # Run setup.ps1 to download/build axslcc (Linux/macOS/Android/iOS)
+    - name: Run setup.ps1 (Linux/macOS/Android/iOS)
+      if: matrix.platform != 'windows'
+      shell: pwsh
+      run: ./setup.ps1
+
     # Windows Build
     - name: Configure and Build Windows
       if: matrix.platform == 'windows'
