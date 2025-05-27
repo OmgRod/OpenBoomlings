@@ -45,7 +45,7 @@ jobs:
       if: matrix.platform == 'linux' || matrix.platform == 'android'
       run: |
         sudo apt-get update
-        sudo apt-get install -y libgl1-mesa-dev libglu1-mesa-dev mesa-common-dev nasm unzip openjdk-11-jdk curl
+        sudo apt-get install -y libgl1-mesa-dev libglu1-mesa-dev mesa-common-dev nasm unzip openjdk-11-jdk curl libgtk-3-dev
 
     # Install PowerShell on Linux/macOS if missing (for setup.ps1)
     - name: Install PowerShell (Linux/macOS)
