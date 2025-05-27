@@ -11,8 +11,17 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest, macos-latest, macos-latest]
-        platform: [linux, windows, macos, android, ios]
+        include:
+        - os: ubuntu-latest
+          platform: linux
+        - os: windows-latest
+          platform: windows
+        - os: macos-latest
+          platform: macos
+        - os: ubuntu-latest
+          platform: android
+        - os: macos-latest
+          platform: ios
 
     steps:
     - name: Checkout repo
