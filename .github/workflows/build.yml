@@ -40,6 +40,13 @@ jobs:
     - name: Install Ninja
       uses: seanmiddleditch/gha-setup-ninja@v3
 
+    # Install Linux dependencies (OpenGL libs, nasm, unzip, Java) for Linux and Android
+    - name: Install Linux dependencies
+      if: matrix.platform == 'linux' || matrix.platform == 'android'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libgl1-mesa-dev libglu1-mesa-dev mesa-common-dev nasm unzip openjdk-11-jdk curl
+
     # Install PowerShell on Linux/macOS if missing (for setup.ps1)
     - name: Install PowerShell (Linux/macOS)
       working-directory: axmol
@@ -88,9 +95,6 @@ jobs:
     - name: Install Android SDK and NDK
       if: matrix.platform == 'android'
       run: |
-        sudo apt-get update
-        sudo apt-get install -y unzip openjdk-11-jdk
-
         export ANDROID_SDK_ROOT=$HOME/android-sdk
 
         mkdir -p $ANDROID_SDK_ROOT/cmdline-tools
