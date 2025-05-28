@@ -1,23 +1,4 @@
-#include "axmol.h"
-#include "renderer/backend/Enums.h"
 #include "LoadingLayer.hpp"
-#include "LoadingLayer.h"
-#include "GameSoundManager.h"
-#include "GameKitManager.h"
-#include "GameStoreManager.h"
-#include "GameSocialManager.h"
-#include "GameStatsManager.h"
-#include "GameManager.h"
-#include "MoreGamesManager.h"
-#include "ObjectManager.h"
-#include "../AppDelegate.h"
-#include "GameSaveManager.h"
-#include "GameAdManager.h"
-#include "GameSocialManager.h"
-#include "GameKitManager.h"
-#include "ContentManager.h"
-#include <cstdlib>
-#include <sys/timeb.h>
 
 using namespace ax;
 
@@ -31,11 +12,11 @@ bool LoadingLayer::init() {
     time_t currentTime = time(nullptr);
     srand(currentTime);
 
-    Sprite* background = Sprite::createWithSpriteFrameName("BlankBG_001.png");
+    Sprite* background = Sprite::create("images/startMenuSheet/BlankBG_001.png");
     background->setPosition(dir->getWinSize() / 2);
     this->addChild(background);
 
-    Sprite* logo = Sprite::createWithSpriteFrameName("RobTopLogoBig_001.png");
+    Sprite* logo = Sprite::create("images/startMenuSheet/RobTopLogoBig_001.png");
     logo->setPosition(dir->getWinSize() / 2);
     this->addChild(logo);
 
@@ -52,10 +33,10 @@ bool LoadingLayer::init() {
         this->m_loadingLabel->setScale(newScale);
     }
 
-    Sprite* sliderGroove = Sprite::create("slidergroove.png");
+    Sprite* sliderGroove = Sprite::create("images/slidergroove.png");
     this->addChild(sliderGroove, 3);
 
-    Sprite* sliderBar = Sprite::create("sliderBar.png");
+    Sprite* sliderBar = Sprite::create("images/sliderBar.png");
     this->m_sliderBar = sliderBar;
     this->m_sliderBarScale = 8.0f;
     this->m_sliderBarMaxWidth = sliderGroove->getContentSize().width - 4.0f;
@@ -77,7 +58,7 @@ bool LoadingLayer::init() {
     this->updateProgress();
 
     auto delay = DelayTime::create(0.0f);
-    auto callback = CallFunc::create(this, callfunc_selector(LoadingLayer::loadAssets));
+    auto callback = CallFunc::create([this]() { this->loadAssets(); });
     auto sequence = Sequence::create(delay, callback, nullptr);
     dir->getActionManager()->addAction(sequence, this, false);
 
@@ -239,33 +220,31 @@ LoadingLayer* LoadingLayer::create() {
 }
 
 void LoadingLayer::loadAssets() {
-    struct timeb timeStart, timeEnd;
-    ftime(&timeStart);
-
-    int currentStep = _loadStep;
+    static int loadStep = 0;
+    int currentStep = loadStep;
 
     if (currentStep < 1) {
-        FileSaveManager::sharedState()->load();
-        GameStoreManager::sharedState()->load();
+        // FileSaveManager::sharedState()->load();
+        // GameStoreManager::sharedState()->load();
 
-        GameSoundManager::sharedManager()->setup();
-        GameStatsManager::sharedState()->load();
+        // GameSoundManager::sharedManager()->setup();
+        // GameStatsManager::sharedState()->load();
 
-        GameKitManager::sharedState()->setup();
-        GameManager::sharedState()->load();
+        // GameKitManager::sharedState()->setup();
+        // GameManager::sharedState()->load();
 
-        int someFlag = 0;
-        GameManager::sharedState()->getSomeData(&someFlag);
-        if (someFlag == 0) {
-            AppDelegate::getUserID();
-        }
+        // int someFlag = 0;
+        // GameManager::sharedState()->getSomeData(&someFlag);
+        // if (someFlag == 0) {
+        //     AppDelegate::getUserID();
+        // }
 
-        MoreGamesManager::sharedState()->checkMoreGames();
+        // MoreGamesManager::sharedState()->checkMoreGames();
 
-        AppDelegate::setSomeFlag(1);
+        // AppDelegate::setSomeFlag(1);
 
-        auto fontCache = BitmapFontCache::sharedFontCache();
-        fontCache->fontWithConfigFile("chatFont.fnt");
+        // auto fontCache = BitmapFontCache::sharedFontCache();
+        // fontCache->fontWithConfigFile("chatFont.fnt");
 
         auto textureCache = Director::getInstance()->getTextureCache();
         textureCache->addImage("bmfonts/goldFont.png");
@@ -282,7 +261,7 @@ void LoadingLayer::loadAssets() {
         Label::createWithBMFont("", "bmfonts/scoreFont2.fnt", ax::TextHAlignment::CENTER, 0, dummyPos);
 
         Texture2D::setDefaultAlphaPixelFormat(backend::PixelFormat::RGBA8);
-        textureCache->addImage("square03_001.png");
+        // textureCache->addImage("square03_001.png");
 
         Texture2D::setDefaultAlphaPixelFormat(backend::PixelFormat::RGBA4);
     } else {
@@ -290,93 +269,93 @@ void LoadingLayer::loadAssets() {
         auto spriteFrameCache = SpriteFrameCache::getInstance();
 
         switch (currentStep) {
-            case 1:
-                textureCache->addImage("BoomUISheet.png");
-                spriteFrameCache->addSpriteFramesWithFile("BoomUISheet.plist");
-                break;
+            // case 1:
+            //     textureCache->addImage("BoomUISheet.png");
+            //     spriteFrameCache->addSpriteFramesWithFile("BoomUISheet.plist");
+            //     break;
 
-            case 2:
-                textureCache->addImage("ObjectSheet.png");
-                spriteFrameCache->addSpriteFramesWithFile("ObjectSheet.plist");
-                break;
+            // case 2:
+            //     textureCache->addImage("ObjectSheet.png");
+            //     spriteFrameCache->addSpriteFramesWithFile("ObjectSheet.plist");
+            //     break;
 
-            case 3:
-                textureCache->addImage("boomIconSheet.png");
-                spriteFrameCache->addSpriteFramesWithFile("boomIconSheet.plist");
-                break;
+            // case 3:
+            //     textureCache->addImage("boomIconSheet.png");
+            //     spriteFrameCache->addSpriteFramesWithFile("boomIconSheet.plist");
+            //     break;
 
-            case 4:
-                textureCache->addImage("menuSheet.png");
-                spriteFrameCache->addSpriteFramesWithFile("menuSheet.plist");
+            // case 4:
+            //     // textureCache->addImage("menuSheet.png");
+            //     // spriteFrameCache->addSpriteFramesWithFile("menuSheet.plist");
 
-                textureCache->addImage("particleImgSheet.png");
-                spriteFrameCache->addSpriteFramesWithFile("particleImgSheet.plist");
+            //     // textureCache->addImage("particleImgSheet.png");
+            //     // spriteFrameCache->addSpriteFramesWithFile("particleImgSheet.plist");
 
-                textureCache->addImage("BoomSheet02.png");
-                spriteFrameCache->addSpriteFramesWithFile("BoomSheet02.plist");
+            //     // textureCache->addImage("BoomSheet02.png");
+            //     // spriteFrameCache->addSpriteFramesWithFile("BoomSheet02.plist");
 
-                ObjectManager::instance()->setup();
-                break;
-            case 10:
-                SpriteFrameCache::getInstance()->addSpriteFramesWithFile("plist/Color_xyz_AnimDesc.plist");
-                break;
-            case 12:
-                SpriteFrameCache::getInstance()->addSpriteFramesWithFile("plist/MegaColor_xyz_AnimDesc.plist");
+            //     // ObjectManager::instance()->setup();
+            //     break;
+            // case 10:
+            //     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("plist/Color_xyz_AnimDesc.plist");
+            //     break;
+            // case 12:
+            //     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("plist/MegaColor_xyz_AnimDesc.plist");
 
-                break;
+            //     break;
 
             case 13:
             {
-                GameSaveManager::sharedState()->load();
+                // GameSaveManager::sharedState()->load();
 
-                GameManager::sharedState()->fadeInMusic("audio/BoomlingsTitle.mp3");
+                // GameManager::sharedState()->fadeInMusic("audio/BoomlingsTitle.mp3");
 
-                GameAdManager::sharedState()->setup();
+                // GameAdManager::sharedState()->setup();
 
-                GameKitManager::sharedState()->setupAchievementRewards();
+                // GameKitManager::sharedState()->setupAchievementRewards();
 
                 auto director = Director::getInstance();
 
-                int offset = AppDelegate::get();
-                int delay = offset == 0 ? 0 : offset + 4;
-                director->getScheduler()->schedule([this](float) { this->loadingFinished(); }, this, 0, false);
+                // int offset = AppDelegate::get();
+                // int delay = offset == 0 ? 0 : offset + 4;
+                // director->getScheduler()->schedule([this](float) { this->loadingFinished(); }, this, 0, false);
 
-                if (AppDelegate::isNetworkAvailable())
-                {
-                    if (!GameStoreManager::sharedState()->isFeatureUnlocked("boomlings.iap.premium"))
-                    {
-                        GameAdManager::sharedState()->cacheInterstitial();
-                        GameAdManager::sharedState()->updateAdPrio();
-                    }
+                // if (AppDelegate::isNetworkAvailable())
+                // {
+                //     if (!GameStoreManager::sharedState()->isFeatureUnlocked("boomlings.iap.premium"))
+                //     {
+                //         GameAdManager::sharedState()->cacheInterstitial();
+                //         GameAdManager::sharedState()->updateAdPrio();
+                //     }
 
-                    int local1 = 0;
-                    GameManager::sharedState()->getSomeData(&local1);
+                //     int local1 = 0;
+                //     GameManager::sharedState()->getSomeData(&local1);
 
-                    bool someFlag = false;
-                    if (local1 != 0)
-                    {
-                        int local2 = 0;
-                        GameManager::sharedState()->getSomeData(&local2);
-                        someFlag = (local2 != 0);
-                    }
+                //     bool someFlag = false;
+                //     if (local1 != 0)
+                //     {
+                //         int local2 = 0;
+                //         GameManager::sharedState()->getSomeData(&local2);
+                //         someFlag = (local2 != 0);
+                //     }
 
-                    if (someFlag)
-                    {
-                        GameSocialManager::sharedState()->getRefBonus(false);
-                    }
+                //     if (someFlag)
+                //     {
+                //         GameSocialManager::sharedState()->getRefBonus(false);
+                //     }
 
-                    GameKitManager::sharedState()->submitCachedScores();
-                    GameKitManager::sharedState()->trySubmitFBScore();
-                }
+                //     GameKitManager::sharedState()->submitCachedScores();
+                //     GameKitManager::sharedState()->trySubmitFBScore();
+                // }
 
-                AppDelegate::get()->loadingIsFinished();
-                GameSocialManager::performQueuedFBAction();
-                GameAdManager::sharedState()->getTapPoints();
+                // AppDelegate::get()->loadingIsFinished();
+                // GameSocialManager::performQueuedFBAction();
+                // GameAdManager::sharedState()->getTapPoints();
 
-                if (!GameManager::sharedState()->isInitialized())
-                {
-                    AppDelegate::get()->onGameLaunch();
-                }
+                // if (!GameManager::sharedState()->isInitialized())
+                // {
+                //     AppDelegate::get()->onGameLaunch();
+                // }
 
                 loadingFinished();
                 return;
@@ -387,11 +366,11 @@ void LoadingLayer::loadAssets() {
         }
     }
 
-    ftime(&timeEnd);
+    // Timing code removed due to incomplete type and undefined function
 
-    _loadFinished = true;
+    // _loadFinished = true;
 
-    _loadStep += 1;
+    loadStep += 1;
 
     updateProgress();
 
@@ -407,4 +386,10 @@ void LoadingLayer::loadAssets() {
     auto seq = Sequence::create(delay, callFunc, nullptr);
 
     this->runAction(seq);
+}
+
+void LoadingLayer::loadingFinished() {
+    auto director = Director::getInstance();
+    auto scene = MenuLayer::scene();
+    director->replaceScene(scene);
 }

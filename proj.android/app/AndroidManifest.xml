@@ -10,7 +10,7 @@
         android:icon="@mipmap/ic_launcher">
 
         <!-- Tell AxmolActivity the name of our .so -->
-        <meta-data android:name="android.app.lib_name"
+        <meta-data android:name="com.omgrod.boomlings"
                    android:value="Boomlings" />
 
         <activity

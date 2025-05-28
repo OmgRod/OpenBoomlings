@@ -1,11 +1,18 @@
 #pragma once
 
 #include "axmol.h"
+#include "axmodify/MenuItemSpriteExtra.hpp"
+#include "SimpleGamePiece.hpp"
 
 using namespace ax;
 
 class MenuLayer : public Layer {
 public:
+    SimpleGamePiece* blockR;
+    SimpleGamePiece* blockG;
+    SimpleGamePiece* blockB;
+    SimpleGamePiece* blockY;
+
     bool init();
     void menuRobtopCallback();
     void menuFeedbackCallback();
