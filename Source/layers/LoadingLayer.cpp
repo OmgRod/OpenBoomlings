@@ -21,7 +21,7 @@ bool LoadingLayer::init() {
     this->addChild(logo);
 
     this->m_showingLoadingString = true;
-    this->m_loadingLabel = Label::createWithBMFont("bmfonts/goldFont.fnt", std::string(getLoadingString()), ax::TextHAlignment::CENTER, 400.0f);
+    this->m_loadingLabel = Label::createWithBMFont("fonts/goldFont.fnt", std::string(getLoadingString()), ax::TextHAlignment::CENTER, 400.0f);
 
     this->m_loadingLabel->setPosition(dir->getWinSize() / 2);
     this->m_loadingLabel->setScale(0.7f);
@@ -247,18 +247,18 @@ void LoadingLayer::loadAssets() {
         // fontCache->fontWithConfigFile("chatFont.fnt");
 
         auto textureCache = Director::getInstance()->getTextureCache();
-        textureCache->addImage("bmfonts/goldFont.png");
-        textureCache->addImage("bmfonts/bigFont.png");
-        textureCache->addImage("bmfonts/levelFont.png");
-        textureCache->addImage("bmfonts/numbersFont.png");
-        textureCache->addImage("bmfonts/scoreFont2.png");
+        textureCache->addImage("fonts/goldFont.png");
+        textureCache->addImage("fonts/bigFont.png");
+        textureCache->addImage("fonts/levelFont.png");
+        textureCache->addImage("fonts/numbersFont.png");
+        textureCache->addImage("fonts/scoreFont2.png");
 
         Vec2 dummyPos = Vec2(0, 0);
-        Label::createWithBMFont("", "bmfonts/goldFont.fnt", ax::TextHAlignment::CENTER, 0, dummyPos);
-        Label::createWithBMFont("", "bmfonts/bigFont.fnt", ax::TextHAlignment::CENTER, 0, dummyPos);
-        Label::createWithBMFont("", "bmfonts/levelFont.fnt", ax::TextHAlignment::CENTER, 0, dummyPos);
-        Label::createWithBMFont("", "bmfonts/numbersFont.fnt", ax::TextHAlignment::CENTER, 0, dummyPos);
-        Label::createWithBMFont("", "bmfonts/scoreFont2.fnt", ax::TextHAlignment::CENTER, 0, dummyPos);
+        Label::createWithBMFont("", "fonts/goldFont.fnt", ax::TextHAlignment::CENTER, 0, dummyPos);
+        Label::createWithBMFont("", "fonts/bigFont.fnt", ax::TextHAlignment::CENTER, 0, dummyPos);
+        Label::createWithBMFont("", "fonts/levelFont.fnt", ax::TextHAlignment::CENTER, 0, dummyPos);
+        Label::createWithBMFont("", "fonts/numbersFont.fnt", ax::TextHAlignment::CENTER, 0, dummyPos);
+        Label::createWithBMFont("", "fonts/scoreFont2.fnt", ax::TextHAlignment::CENTER, 0, dummyPos);
 
         Texture2D::setDefaultAlphaPixelFormat(backend::PixelFormat::RGBA8);
         // textureCache->addImage("square03_001.png");
